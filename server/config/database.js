@@ -1,5 +1,4 @@
 const { default: mongoose } = require("mongoose")
-const mongo = require("mongoose")
 const db = "mongodb+srv://suriyajagan25:MCizwaT6GmejMjKo@cluster0.ahtjf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 const configureDB  = ()=>{
