@@ -5,12 +5,27 @@ const roleController = {}
 roleController.create = (req, res) => {
     const { roleType, title } = req.body;
 
-    Role.create({ roleType, title })
+    Role.findOne({ roleType: roleType })
         .then((result) => {
-            res.status(200).json({
-                data: result,
-                message: "Successfully created role"
-            });
+            if (result) {
+                res.status(400).json({
+                    message: "Role type is already created, please try again"
+                });
+            } else {
+                Role.create({ roleType, title })
+                    .then((result) => {
+                        res.status(200).json({
+                            data: result,
+                            message: "Successfully created role"
+                        });
+                    })
+                    .catch((err) => {
+                        res.status(400).json({
+                            error: err,
+                            message: "Role can't be created, please try again"
+                        });
+                    });
+            }
         })
         .catch((err) => {
             res.status(400).json({
