@@ -1,5 +1,6 @@
 const { default: mongoose } = require("mongoose")
 const { default: isEmail } = require("validator/lib/isEmail")
+const { default: isNumeric } = require("validator/lib/isNumeric")
 
 const { Schema } = mongoose
 
@@ -24,13 +25,11 @@ const userSchema = new Schema({
     mobile: {
         type: Number,
         required: [true, "Mobile is required"],
-        min: [10, 'Mobile should be 10 number'],
-        max: [10, 'Mobile should be 10 number'],
         validate: {
             validator: function (v) {
-                return /\d{3}-\d{3}-\d{4}/.test(v);
+                return String(v).length === 10 && isNumeric(String(v));
             },
-            message: props => `${props?.value} is not a valid phone number!`
+            message: props => `${props?.value} is not a valid 10-digit phone number!`
         },
     },
     password: {
