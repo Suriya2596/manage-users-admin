@@ -1,0 +1,293 @@
+/*-----------------------------------------------------------------------------------
+
+    Template Name: 
+    Template URI: 
+    Description: This is Next js template
+    Author: Suriya
+    Author URI: http://.com
+    Version: 1.0
+
+-----------------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------------
+
+     CSS INDEX
+    ===================
+    1.Global CSS
+    2.Common CSS
+    3.Header CSS
+    4.Home Pgae CSS
+
+-----------------------------------------------------------------------------------*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Nunito";
+  src: url("../../../public/fonts/Nunito-Black.ttf") format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Nunito";
+  src: url("../../../public/fonts/Nunito-BlackItalic.ttf") format('truetype');
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("../../../public/fonts/Nunito-ExtraBold.ttf") format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Nunito";
+  src: url("../../../public/fonts/Nunito-ExtraBoldItalic.ttf") format('truetype');
+  font-weight: 800;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("../../../public/fonts/Nunito-Bold.ttf") format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Nunito";
+  src: url("../../../public/fonts/Nunito-Bold.ttf") format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("../../../public/fonts/Nunito-SemiBold.ttf") format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Nunito";
+  src: url("../../../public/fonts/Nunito-SemiBoldItalic.ttf") format('truetype');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("../../../public/fonts/Nunito-Medium.ttf") format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Nunito";
+  src: url("../../../public/fonts/Nunito-MediumItalic.ttf") format('truetype');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("../../../public/fonts/Nunito-Regular.ttf") format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("../../../public/fonts/Nunito-Light.ttf") format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Nunito";
+  src: url("../../../public/fonts/Nunito-LightItalic.ttf") format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+
+@font-face {
+  font-family: "Nunito";
+  src: url("../../../public/fonts/Nunito-ExtraLight.ttf") format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Nunito";
+  src: url("../../../public/fonts/Nunito-ExtraLightItalic.ttf") format('truetype');
+  font-weight: 200;
+  font-style: italic;
+}
+
+
+:root {
+  --font-Nunito: "Nunito", sans-serif;
+  --primOne: #581D9E;
+  --primTwo: #B587EC;
+  --primThree: #D5C8E5;
+  --darkOne: #180A28;
+  --darkTwo: #200046;
+  --darkThree: #6F667A;
+  --whiteOne: #F8F3FF;
+  --whiteTwo: #D2D2D2;
+}
+
+* {
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+body {
+  box-sizing: border-box !important;
+  font-family: var(--font-Nunito);
+  background-color: var(--darkOne);
+  padding: 0;
+  margin: 0;
+  color: var(--whiteOne);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Removeing input number arrow Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Removeing input number arrow : Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/*----------------------------------------------------*/
+/* 1.Global CSS */
+/*----------------------------------------------------*/
+/* fonts size */
+p {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--darkThree);
+}
+a{
+  color: var(--primOne);
+}
+
+h1 {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--darkTwo);
+}
+h2 {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--darkTwo);
+}
+h3 {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--darkTwo);
+}
+h4 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--darkTwo);
+}
+h5 {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--darkTwo);
+}
+h6 {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--darkTwo);
+}
+
+/*----------------------------------------*/
+/* 2.Common CSS */
+/*----------------------------------------*/
+
+/*----------------------------------------*/
+/* 3.Header CSS */
+/*----------------------------------------*/
+
+/*----------------------------------------*/
+/* 4.Home Page CSS */
+/*----------------------------------------*/
+
+
+/*----------------------------------------*/
+/* 5.Resume Page CSS */
+/*----------------------------------------*/
+
+/*----------------------------------------*/
+/* 6.Portfolio Page CSS */
+/*----------------------------------------*/
+
+/*----------------------------------------*/
+/* 7.Services Page CSS */
+/*----------------------------------------*/
+
+/*----------------------------------------*/
+/* 8.Contact Page CSS */
+/*----------------------------------------*/
+
+
+/*----------------------------------------*/
+/*Responsive CSS */
+/*----------------------------------------*/
+@media (max-width: 1440px) {
+}
+
+@media (max-width: 1199px) {
+}
+
+@media (max-width: 991px) {
+}
+
+@media (max-width: 767px) {
+  h1 {
+    font-size: 34px;
+  }
+  h2 {
+    font-size: 30px;
+  }
+  h3 {
+    font-size: 26px;
+  }
+  h4 {
+    font-size: 22px;
+  }
+  h5 {
+    font-size: 18px;
+  }
+  h6 {
+    font-size: 16px;
+  }
+  p{
+    font-size: 16px
+  }
+}
+
+@media (max-width: 576px) {
+}
+
+@media (max-width: 425px) {
+}
+
+@media (max-width: 375px) {
+}
+
+@media (max-width: 320px) {
+}
+
+/*--------------------------------*/
+/* .End CSS
+/*--------------------------------*/
