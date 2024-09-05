@@ -1,18 +1,15 @@
 import { useState } from "react";
 import {
-  InputPasswordLable,
   InputTextLable,
 } from "../../components/common/InputFields";
 import {
   validateEmail,
-  validatePassword,
 } from "../../components/helpers/Validations";
 import { Link } from "react-router-dom";
 import { ButtonBox } from "../../components/common/Button";
 
-const Login = () => {
+const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [formError, setFormError] = useState({});
   let formErr = {};
 
@@ -21,13 +18,6 @@ const Login = () => {
       formErr.email = "Email is required";
     } else if (!validateEmail(email)) {
       formErr.email = "Email is invalidate";
-    }
-
-    if (String(password).trim().length === 0) {
-      formErr.password = "Password is required";
-    } else if (!validatePassword(password)) {
-      formErr.password =
-        "Password use 8 charater, atleast one uppercase, atleast one number, atleast one symbol";
     }
   };
 
@@ -40,7 +30,6 @@ const Login = () => {
     } else {
       const formData = {
         email,
-        password,
       };
       console.log(formData);
     }
@@ -51,7 +40,7 @@ const Login = () => {
       <div className=" w-[100%] md:w-[500px] px-4 py-4 rounded-[6px] bg-white border-2 border-whiteTwo">
         <form onSubmit={handleFormSubmit} className="grid grid-cols-12 gap-4">
           <div className="col-span-12">
-            <h4 className="text-center">Login</h4>
+            <h4 className="text-center">Forgot Password</h4>
           </div>
           <div className="col-span-12">
             <InputTextLable
@@ -65,27 +54,11 @@ const Login = () => {
               error={formError?.email}
             />
           </div>
-          <div className="col-span-12">
-            <InputPasswordLable
-              value={password}
-              placeholder={"Enter Password"}
-              onChange={(e) => {
-                setPassword(e.target.value);
-                delete formError?.password;
-              }}
-              label={"Password"}
-              error={formError?.password}
-            />
-          </div>
           <div className="col-span-12 flex justify-center items-center">
-            <ButtonBox type={"submit"}>Login</ButtonBox>
+            <ButtonBox type={"submit"}>Send Link</ButtonBox>
           </div>
           <div className="col-span-12 text-center">
-            <span>Don&lsquo;t have account?</span>{" "}
-            <Link to={"/signup"}>Register</Link>
-          </div>
-          <div className="col-span-12 text-center">
-            <Link to={"/forgotPassword"}>Forgot Password?</Link>
+            <Link to={"/login"}>Back to login</Link>
           </div>
         </form>
       </div>
@@ -93,4 +66,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPassword;

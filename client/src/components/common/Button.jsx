@@ -1,13 +1,28 @@
 import PropTypes from "prop-types";
-export const ButtonBox = ({ children, type }) => {
+import { Link } from "react-router-dom";
+export const ButtonBox = ({ children, type="button", to , onClick=()=>{} }) => {
   return (
     <div>
-      <button
-        type={type || "button"}
-        className="font-[500] outline-none border-none bg-primOne hover:bg-primTwo text-whiteOne hover:text-primOne  px-12 py-1.5 rounded-[6px]"
-      >
-        {children}
-      </button>
+      {to ? (
+        <Link
+          to={to || "/"}
+          className="font-[500] outline-none border-none bg-primOne hover:bg-primTwo text-whiteOne hover:text-primOne  px-8 py-1.5 rounded-[6px]"
+        >
+          {children}
+        </Link>
+      ) : (
+        <button
+          type={type || "button"}
+          onClick={()=>{
+            if(type==="button"){
+              onClick()
+            }
+          }}
+          className="font-[500] outline-none border-none bg-primOne hover:bg-primTwo text-whiteOne hover:text-primOne  px-8 py-1.5 rounded-[6px]"
+        >
+          {children}
+        </button>
+      )}
     </div>
   );
 };
@@ -15,17 +30,28 @@ export const ButtonBox = ({ children, type }) => {
 ButtonBox.propTypes = {
   children: PropTypes.node.isRequired,
   type: PropTypes.string,
+  to: PropTypes.string,
+  onClick: PropTypes.func
 };
 
-export const ButtonCancle = ({ children, type }) => {
+export const ButtonCancle = ({ children, type , to}) => {
   return (
     <div>
-      <button
-        type={type || "button"}
-        className="font-[500] outline-none border-none bg-primThree hover:bg-darkOne text-darkTwo hover:text-whiteOne px-12 py-1.5 rounded-[6px]"
-      >
-        {children}
-      </button>
+      {to ? (
+        <Link
+          to={to || "/"}
+          className="font-[500] outline-none border-none bg-primThree hover:bg-darkOne text-darkTwo hover:text-whiteOne px-8 py-1.5 rounded-[6px]"
+        >
+          {children}
+        </Link>
+      ) : (
+        <button
+          type={type || "button"}
+          className="font-[500] outline-none border-none bg-primThree hover:bg-darkOne text-darkTwo hover:text-whiteOne px-8 py-1.5 rounded-[6px]"
+        >
+          {children}
+        </button>
+      )}
     </div>
   );
 };
@@ -33,4 +59,5 @@ export const ButtonCancle = ({ children, type }) => {
 ButtonCancle.propTypes = {
   children: PropTypes.node.isRequired,
   type: PropTypes.string,
+  to: PropTypes.string,
 };

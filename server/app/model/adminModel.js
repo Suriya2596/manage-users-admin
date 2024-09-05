@@ -4,7 +4,7 @@ const { default: isNumeric } = require("validator/lib/isNumeric")
 
 const { Schema } = mongoose
 
-const userSchema = new Schema({
+const adminSchema = new Schema({
     name: {
         type: String,
         required: [true, "Name is required"]
@@ -43,12 +43,12 @@ const userSchema = new Schema({
         required: [true, "Role is required"],
         ref: "Role",
     },
-    admin:{
-        type:[mongoose.Schema.Types.ObjectId],
-        ref: "Admin"
+    createdBy: {
+        type:String,
+        default: "by known"
     }
 }, { timestamps: true })
 
-const User = mongoose.model("User", userSchema)
+const Admin = mongoose.model("Admin", adminSchema)
 
-module.exports = User
+module.exports = Admin
