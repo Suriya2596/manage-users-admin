@@ -9,8 +9,7 @@ export const validateEmail = (email) => {
   return emailPattern.test(email);
 };
 
-export const validateName = (event) => {
-  const { value } = event.target;
+export const validateName = (value) => {
   const regex = /^[A-Za-z]*$/;
   return regex.test(value);
 };

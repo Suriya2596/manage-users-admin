@@ -7,7 +7,7 @@ export const InputTextLable = ({
   onChange = () => {},
   placeholder,
   error,
-  label
+  label,
 }) => {
   return (
     <Input.Wrapper
@@ -48,7 +48,7 @@ export const InputPasswordLable = ({
   onChange = () => {},
   placeholder,
   error,
-  label
+  label,
 }) => {
   const [visible, { toggle }] = useDisclosure(false);
   return (
@@ -58,7 +58,7 @@ export const InputPasswordLable = ({
           color: error ? "#F6373A" : "#581D9E",
         },
       }}
-      label={label||"Input label"}
+      label={label || "Input label"}
       error={error}
     >
       <PasswordInput
@@ -80,6 +80,48 @@ export const InputPasswordLable = ({
 };
 
 InputPasswordLable.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  error: PropTypes.string,
+  label: PropTypes.string,
+};
+
+export const InputNumberLable = ({
+  value,
+  onChange = () => {},
+  placeholder,
+  error,
+  label,
+}) => {
+  return (
+    <Input.Wrapper
+      styles={{
+        label: {
+          color: error ? "#F6373A" : "#581D9E",
+        },
+      }}
+      label={label || "Input label"}
+      error={error}
+    >
+      <Input
+        type="number"
+        value={value || ""}
+        onChange={onChange}
+        placeholder={placeholder || "Enter"}
+        styles={{
+          input: {
+            "&:focus": {
+              borderColor: "#581D9E",
+            },
+          },
+        }}
+      />
+    </Input.Wrapper>
+  );
+};
+
+InputNumberLable.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
   placeholder: PropTypes.string,

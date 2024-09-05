@@ -3,12 +3,12 @@ import {
   InputPasswordLable,
   InputTextLable,
 } from "../../components/common/InputFields";
-import { Button } from "@mantine/core";
 import {
   validateEmail,
   validatePassword,
 } from "../../components/helpers/Validations";
 import { Link } from "react-router-dom";
+import { ButtonBox } from "../../components/common/Button";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -56,9 +56,10 @@ const Login = () => {
           <div className="col-span-12">
             <InputTextLable
               value={email}
+              placeholder={"Enter Email"}
               onChange={(e) => {
                 setEmail(e.target.value);
-                delete formError?.email
+                delete formError?.email;
               }}
               label={"Email"}
               error={formError?.email}
@@ -67,22 +68,21 @@ const Login = () => {
           <div className="col-span-12">
             <InputPasswordLable
               value={password}
+              placeholder={"Enter Password"}
               onChange={(e) => {
                 setPassword(e.target.value);
-                delete formError?.password
+                delete formError?.password;
               }}
               label={"Password"}
               error={formError?.password}
             />
           </div>
           <div className="col-span-12 flex justify-center items-center">
-            <Button variant="filled" type="submit" color="#581D9E">
-              Login
-            </Button>
+            <ButtonBox type={"submit"}>Login</ButtonBox>
           </div>
           <div className="col-span-12 text-center">
             <span>Don&lsquo;t have account?</span>{" "}
-            <Link to={"/"}>Register</Link>
+            <Link to={"/signup"}>Register</Link>
           </div>
         </form>
       </div>
