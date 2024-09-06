@@ -35,7 +35,6 @@ roleController.create = (req, res) => {
         });
 }
 
-
 roleController.get = (req, res) => {
     Role.find()
         .then((role) => {
@@ -57,5 +56,53 @@ roleController.get = (req, res) => {
             })
         })
 }
+
+roleController.update = (req, res) => {
+    const _id = req.params.id
+    const body = req?.body
+    Role.findOneAndUpdate({ _id: _id }, body, { new: true, runValidators: true })
+        .then((role) => {
+            if (role) {
+                res.status(200).json({
+                    data: role?._id,
+                    message: "Successfull updated the role"
+                })
+            } else {
+                res.status(400).json({
+                    message: "Role can't updated,please try again"
+                })
+            }
+        })
+        .catch((err) => {
+            res.status(400).json({
+                error: err,
+                message: "Role can't updated,please try again"
+            })
+        })
+}
+
+roleController.destroy = (req, res) => {
+    const _id = req.params.id
+    Role.findByIdAndDelete({ _id: _id })
+        .then((role) => {
+            if (role) {
+                res.status(200).json({
+                    data: role?._id,
+                    message: "Successfull deleted the role"
+                })
+            } else {
+                res.status(400).json({
+                    message: "Role can't delete,please try again"
+                })
+            }
+        })
+        .catch((err) => {
+            res.status(400).json({
+                error: err,
+                message: "Role can't delete,please try again"
+            })
+        })
+}
+
 
 module.exports = roleController
