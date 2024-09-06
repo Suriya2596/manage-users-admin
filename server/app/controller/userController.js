@@ -1,6 +1,8 @@
 const User = require("../model/userModel")
 const bcrypt = require("bcrypt")
 const userController = {}
+const jwt = require("jsonwebtoken")
+
 
 userController.create = async (req, res) => {
     const body = req.body;
@@ -48,6 +50,55 @@ userController.create = async (req, res) => {
     } catch (err) {
         return res.status(400).json({
             message: "User can't be created",
+            error: err
+        });
+    }
+}
+
+userController.login = async (req, res) => {
+    const body = req.body;
+
+    try {
+        const requiredFields = ['email', 'password'];
+        for (const field of requiredFields) {
+            if (!body[field]) {
+                return res.status(400).json({
+                    message: `${field} is required`
+                });
+            }
+        }
+        const existingUser = await User.findOne({ email: body.email });
+        if (existingUser) {
+            const match = await bcrypt.compare(body.password, existingUser.password);
+
+            if (match) {
+                const tokenData = {
+                    _id: existingUser._id,
+                    email: existingUser.email,
+                    role: existingUser.role,
+                };
+                const token = jwt.sign(tokenData, process.env.JWT_Verify, { expiresIn: "1d" })
+                if (token) {
+                    return res.status(200).json({ token: `Bearer ${token}`, message: "Login successfully", });
+                } else {
+                    return res.status(400).json({
+                        message: `Something went wronge in create token`
+                    });
+                }
+
+            } else {
+                return res.status(400).json({
+                    message: `Incorrect password or email`
+                });
+            }
+        } else {
+            return res.status(400).json({
+                message: `User with email ${body.email} not exists`
+            });
+        }
+    } catch (err) {
+        return res.status(400).json({
+            message: "Can't be login, please try again",
             error: err
         });
     }

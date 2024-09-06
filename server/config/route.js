@@ -11,7 +11,8 @@ routes.patch("/role/:id", roleController.update)
 routes.delete("/role/:id", roleController.destroy)
 
 
-routes.post("/user/login", userController.create)
-routes.get("/user/list", authentication , userController.list)
+routes.post("/user", userController.create)
+routes.post("/user/login", userController.login)
+routes.get("/user/list", authentication, userController.list)
 
 module.exports = routes
