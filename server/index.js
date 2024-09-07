@@ -1,12 +1,13 @@
 const express = require("express")
 const cors = require("cors")
-const configureDB = require("./config/database")
-const routes = require("./config/route")
+
+const configureDB = require("./config/configureDB")
+const routes = require("./config/routes")
 require('dotenv').config()
 const app = express()
 const PORT  = 3099
-
 configureDB()
+
 
 app.use(cors())
 app.use(express.json())

@@ -44,18 +44,11 @@ const userSchema = new Schema({
         ref: "Role",
     },
     createdBy:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        type:String,
+        default:"by know"
     }
 }, { timestamps: true })
 
-// Pre-save middleware to set createdBy to the user's own ObjectId if not provided
-userSchema.pre('save', function(next) {
-    if (!this.createdBy) {
-        this.createdBy = this._id;
-    }
-    next();
-});
 const User = mongoose.model("User", userSchema)
 
 module.exports = User

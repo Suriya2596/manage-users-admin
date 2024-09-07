@@ -1,4 +1,5 @@
-const Role = require("../model/roleModel")
+const Role = require("../models/RoleModel");
+
 
 const roleController = {}
 
@@ -64,7 +65,7 @@ roleController.update = (req, res) => {
         .then((role) => {
             if (role) {
                 res.status(200).json({
-                    data: role?._id,
+                    data: role,
                     message: "Successfull updated the role"
                 })
             } else {
