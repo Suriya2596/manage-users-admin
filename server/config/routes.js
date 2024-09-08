@@ -20,5 +20,9 @@ routes.post("/reset-password/:id", authController.resetPassword)
 // user
 routes.get("/user", authentication, userController.getLoggedUser)
 routes.get("/user-list", authentication, userController.getAllusers)
+routes.get("/user/:id", authentication, userController.getUserbyId)
+routes.patch("/user/:id", authentication, userController.updateById)
+routes.delete("/user/:id", authentication, userController.deleteUser)
+routes.patch("/user/change-password/:id", authentication, userController.changePassword)
 
 module.exports = routes
