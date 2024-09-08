@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./assets/styles/index.css";
 import "@mantine/core/styles.css";
 import { createTheme, MantineProvider } from "@mantine/core";
-// import ReduxProvider from "./redux/ReduxProvider.jsx";
+import ReduxProvider from "./redux/ReduxProvider.jsx";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 
@@ -17,11 +17,11 @@ export const theme = createTheme({
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-      {/* <ReduxProvider> */}
+      <ReduxProvider>
       <MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
         <App />
       </MantineProvider>
-      {/* </ReduxProvider> */}
+      </ReduxProvider>
     </BrowserRouter>
   </StrictMode>
 );
