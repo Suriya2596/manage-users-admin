@@ -35,7 +35,7 @@ const authSlice = createSlice({
         state.loginAct.errorResponse = action.payload
         state.loginAct.errorMsg = "Failed to login"
      });
-     build.addCase(authUserLoginAction.pending,(state)=>{
+     build.addCase(authUserLoginAction.fulfilled,(state)=>{
         state.loginAct = getInitialState()
         state.loginAct.isSuccess = true
         state.loginAct.successMsg = "Successfully login"
