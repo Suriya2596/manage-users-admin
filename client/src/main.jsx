@@ -18,9 +18,9 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <ReduxProvider>
-      <MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
-        <App />
-      </MantineProvider>
+        <MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
+          <App />
+        </MantineProvider>
       </ReduxProvider>
     </BrowserRouter>
   </StrictMode>

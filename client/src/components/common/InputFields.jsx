@@ -21,6 +21,7 @@ export const InputTextLable = ({
     >
       <Input
         value={value || ""}
+        type="text"
         onChange={onChange}
         placeholder={placeholder || "Enter"}
         styles={{
@@ -60,6 +61,7 @@ export const InputPasswordLable = ({
       }}
       label={label || "Input label"}
       error={error}
+      id="Password"
     >
       <PasswordInput
         value={value || ""}

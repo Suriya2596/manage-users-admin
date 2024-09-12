@@ -6,14 +6,14 @@ const UserSigngOut = createContext();
 
 const UserSigngOutProvider = ({ children }) => {
   const handleSignOut = () => {
-    redirect("/login")
+    redirect("/login");
   };
   return (
     <UserSigngOut.Provider value={{ handleSignOut }}>
       {children}
     </UserSigngOut.Provider>
   );
-}; 
+};
 
 const useUserSigngOut = () => {
   return useContext(UserSigngOut);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   InputPasswordLable,
   InputTextLable,
@@ -8,13 +8,25 @@ import {
   validatePassword,
 } from "../../components/helpers/Validations";
 import { Link } from "react-router-dom";
-import { ButtonBox } from "../../components/common/Button";
+import { ButtonBox, ButtonLoading } from "../../components/common/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { userAuthLoginAction } from "../../redux/feature/userAuth/userAuthActions";
+import { useErrorMsgContext } from "../../context/ErrorMsgContext";
+import { useSuccessMsgContext } from "../../context/SuccessMsgContext";
+import { resetUserAuth } from "../../redux/feature/userAuth/userAuthSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const { handleErrorMsg } = useErrorMsgContext();
+  const { handleSuccessMsg } = useSuccessMsgContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [formError, setFormError] = useState({});
   let formErr = {};
+
+  const { loginAct } = useSelector((state) => {
+    return state.userAuth;
+  });
 
   const handleFormError = () => {
     if (String(email).trim().length === 0) {
@@ -38,13 +50,40 @@ const Login = () => {
       setFormError(formErr);
       formErr = {};
     } else {
+      localStorage.clear();
       const formData = {
         email,
         password,
       };
+      dispatch(userAuthLoginAction({ formData }));
       console.log(formData);
     }
   };
+
+  useEffect(() => {
+    if (loginAct?.isError) {
+      handleErrorMsg({
+        actionResponse: loginAct?.errorResponse,
+        msg: "Error in login",
+        actionResolve: () => {
+          dispatch(resetUserAuth());
+        },
+        isNeedAction401: false,
+      });
+    }
+  }, [loginAct?.isError, dispatch]);
+
+  useEffect(() => {
+    if (loginAct?.isSuccess) {
+      handleSuccessMsg({
+        actionMsg: loginAct?.successMsg,
+        msg: "Successfully login",
+        actionResolve: () => {
+          dispatch(resetUserAuth());
+        },
+      });
+    }
+  }, [loginAct?.isSuccess]);
 
   return (
     <div className="bg-whiteOne h-[100vh] flex justify-center items-center px-4">
@@ -78,7 +117,9 @@ const Login = () => {
             />
           </div>
           <div className="col-span-12 flex justify-center items-center">
-            <ButtonBox type={"submit"}>Login</ButtonBox>
+            <ButtonBox type={loginAct?.isLoading ? "" : "submit"}>
+              {loginAct?.isLoading ? <ButtonLoading /> : "Login"}
+            </ButtonBox>
           </div>
           <div className="col-span-12 text-center">
             <span>Don&lsquo;t have account?</span>{" "}
