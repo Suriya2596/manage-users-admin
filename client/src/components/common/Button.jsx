@@ -15,13 +15,14 @@ export const ButtonBox = ({
   type = "button",
   to,
   onClick = () => {},
+  className,
 }) => {
   return (
-    <div>
+    <>
       {to ? (
         <Link
           to={to || "/"}
-          className="font-[500] outline-none border-none bg-primOne hover:bg-primTwo text-whiteOne hover:text-primOne  px-8 py-1.5 rounded-[6px]"
+          className={`${className} text-center font-[500] outline-none border-none bg-primOne hover:bg-primTwo text-whiteOne hover:text-primOne  px-8 py-1.5 rounded-[6px]`}
         >
           {children}
         </Link>
@@ -33,12 +34,12 @@ export const ButtonBox = ({
               onClick();
             }
           }}
-          className="font-[500] outline-none border-none bg-primOne hover:bg-primTwo text-whiteOne hover:text-primOne  px-8 py-1.5 rounded-[6px]"
+          className={`${className} text-center  font-[500] outline-none border-none bg-primOne hover:bg-primTwo text-whiteOne hover:text-primOne  px-8 py-1.5 rounded-[6px]`}
         >
           {children}
         </button>
       )}
-    </div>
+    </>
   );
 };
 
@@ -47,27 +48,28 @@ ButtonBox.propTypes = {
   type: PropTypes.string,
   to: PropTypes.string,
   onClick: PropTypes.func,
+  className: PropTypes.string,
 };
 
-export const ButtonCancle = ({ children, type, to }) => {
+export const ButtonCancle = ({ children, type, to, className }) => {
   return (
-    <div>
+    <>
       {to ? (
         <Link
           to={to || "/"}
-          className="font-[500] outline-none border-none bg-primThree hover:bg-darkOne text-darkTwo hover:text-whiteOne px-8 py-1.5 rounded-[6px]"
+          className={`${className} text-center font-[500] outline-none border-none bg-primThree hover:bg-darkOne text-darkTwo hover:text-whiteOne px-8 py-1.5 rounded-[6px]`}
         >
           {children}
         </Link>
       ) : (
         <button
           type={type || "button"}
-          className="font-[500] outline-none border-none bg-primThree hover:bg-darkOne text-darkTwo hover:text-whiteOne px-8 py-1.5 rounded-[6px]"
+          className={`${className}  text-center font-[500] outline-none border-none bg-primThree hover:bg-darkOne text-darkTwo hover:text-whiteOne px-8 py-1.5 rounded-[6px]`}
         >
           {children}
         </button>
       )}
-    </div>
+    </>
   );
 };
 
@@ -75,4 +77,5 @@ ButtonCancle.propTypes = {
   children: PropTypes.node.isRequired,
   type: PropTypes.string,
   to: PropTypes.string,
+  className: PropTypes.string,
 };

@@ -9,3 +9,7 @@ setCookiee.propTypes = {
   name: PropTypes.string,
   value: PropTypes.any,
 };
+
+export const getAPIToken = (name) => {
+  return cookies.get(name) && JSON.parse(cookies.get(name));
+};

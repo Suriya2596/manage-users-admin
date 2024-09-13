@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userAuthLoginAction } from "./userAuthActions";
+import { userAuthGetLoggedAction, userAuthLoginAction } from "./userAuthActions";
 
 const getInitialState = () => {
     return {
@@ -14,6 +14,8 @@ const getInitialState = () => {
 
 const initialState = {
     loginAct: getInitialState(),
+    getUserLoggedAct: getInitialState(),
+    userData: {}
 };
 
 const userAuthSlice = createSlice({
@@ -22,6 +24,12 @@ const userAuthSlice = createSlice({
     reducers: {
         resetUserAuth: (state) => {
             state.loginAct = getInitialState();
+            state.getUserLoggedAct = getInitialState()
+        },
+        resetUserAuthValue: (state) => {
+            state.loginAct = getInitialState()
+            state.getUserLoggedAct = getInitialState()
+            state.userData = {}
         }
     },
     extraReducers: (builder) => {
@@ -40,9 +48,28 @@ const userAuthSlice = createSlice({
             state.loginAct.isSuccess = true
             state.loginAct.successMsg = "Successfully login"
         });
+
+
+
+        builder.addCase(userAuthGetLoggedAction.pending, (state) => {
+            state.getUserLoggedAct = getInitialState()
+            state.getUserLoggedAct.isLoading = true
+        })
+        builder.addCase(userAuthGetLoggedAction.rejected, (state, action) => {
+            state.getUserLoggedAct = getInitialState()
+            state.getUserLoggedAct.isError = true
+            state.getUserLoggedAct.errorResponse = action.payload
+            state.getUserLoggedAct.errorMsg = action.payload?.message
+        });
+        builder.addCase(userAuthGetLoggedAction.fulfilled, (state, action) => {
+            state.getUserLoggedAct = getInitialState()
+            state.getUserLoggedAct.isSuccess = true
+            state.getUserLoggedAct.successMsg = action.payload?.message
+            state.userData = action.payload?.data
+        });
     }
 })
 
-export const { resetUserAuth } = userAuthSlice.actions
+export const { resetUserAuth, resetUserAuthValue } = userAuthSlice.actions
 
 export default userAuthSlice.reducer

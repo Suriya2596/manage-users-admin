@@ -7,7 +7,7 @@ import {
   validateEmail,
   validatePassword,
 } from "../../components/helpers/Validations";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ButtonBox, ButtonLoading } from "../../components/common/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { userAuthLoginAction } from "../../redux/feature/userAuth/userAuthActions";
@@ -17,6 +17,7 @@ import { resetUserAuth } from "../../redux/feature/userAuth/userAuthSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { handleErrorMsg } = useErrorMsgContext();
   const { handleSuccessMsg } = useSuccessMsgContext();
   const [email, setEmail] = useState("");
@@ -56,7 +57,6 @@ const Login = () => {
         password,
       };
       dispatch(userAuthLoginAction({ formData }));
-      console.log(formData);
     }
   };
 
@@ -80,6 +80,7 @@ const Login = () => {
         msg: "Successfully login",
         actionResolve: () => {
           dispatch(resetUserAuth());
+          navigate("/");
         },
       });
     }
