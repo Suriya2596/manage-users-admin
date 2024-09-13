@@ -33,3 +33,19 @@ export const userAuthGetLoggedAction = createAsyncThunk("userAuth/userAuthGetLog
         return thunkAPI.rejectWithValue(error?.response);
     }
 })
+
+export const userAuthUpdateAction = createAsyncThunk("userAuth/userAuthUpdateAction", async (req, thunkAPI) => {
+    try {
+        const response = await axiosIntance.patch(`user/${req?.id}`, req?.formData, {
+            headers: {
+                Authorization: getAPIToken("token")
+            }
+        });
+        if (response.status >= 200 && response.status < 300) {
+            const data = response?.data;
+            return data;
+        }
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error?.response);
+    }
+})

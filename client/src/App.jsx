@@ -5,6 +5,7 @@ import ScrollToTop from "./components/helpers/ScrollTop";
 import Loadable from "./components/helpers/Loadable";
 import { Toaster } from "react-hot-toast";
 import AllContextProvider from "./context/AllContextProvider";
+import { ProtectedRouter } from "./components/layout/ProtectedRouter";
 // components
 // Auth
 const Login = Loadable(lazy(() => import("./modules/authModules/Login")));
@@ -36,9 +37,11 @@ const App = () => {
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/resetPassword" element={<ResetPassword />} />
 
-          <Route path="/" element={<UserDashboard />} />
-          <Route path="/editUser" element={<EditUser />} />
-          <Route path="/changePassword" element={<ChangePassword />} />
+          <Route path="" element={<ProtectedRouter />}>
+            <Route path="/" index element={<UserDashboard />} />
+            <Route path="/editUser" element={<EditUser />} />
+            <Route path="/changePassword" element={<ChangePassword />} />
+          </Route>
         </Routes>
       </ScrollToTop>
     </AllContextProvider>

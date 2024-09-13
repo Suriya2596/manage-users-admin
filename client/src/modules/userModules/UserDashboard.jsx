@@ -3,6 +3,7 @@ import { ButtonBox, ButtonCancle } from "../../components/common/Button";
 import { useEffect } from "react";
 import { userAuthGetLoggedAction } from "../../redux/feature/userAuth/userAuthActions";
 import { PageLoading } from "../../components/common/LoadingCustom";
+import { resetUserAuth } from "../../redux/feature/userAuth/userAuthSlice";
 
 const UserDashboard = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,13 @@ const UserDashboard = () => {
   const { getUserLoggedAct, userData } = useSelector((state) => {
     return state.userAuth;
   });
-  
+
+  useEffect(() => {
+    if (getUserLoggedAct?.isSuccess) {
+      dispatch(resetUserAuth());
+    }
+  }, [dispatch, getUserLoggedAct]);
+
   return (
     <div className="bg-whiteOne h-[100vh] flex justify-center items-center px-4">
       <div className=" w-[100%] md:w-[400px] px-4 py-4 rounded-[6px] bg-white border-2 border-whiteTwo">
@@ -41,7 +48,7 @@ const UserDashboard = () => {
             </div>
             <div className="col-span-12 flex items-center gap-4">
               <span>Role:</span>
-              <span>{userData?.name || ""}</span>
+              <span>{userData?.role?.title || ""}</span>
             </div>
             <div className="col-span-12">
               <div className="flex flex-col sm:flex-row justify-center items-center gap-4">

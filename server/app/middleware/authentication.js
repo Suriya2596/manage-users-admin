@@ -7,7 +7,7 @@ const authentication = (req, res, next) => {
     try {
         const tokenData = jwt.verify(token, process.env.JWT_Verify)
         if (tokenData) {
-            User.findOne({ _id: tokenData._id })
+            User.findOne({ _id: tokenData._id }).populate("role")
                 .then((user) => {
                     if (user) {
                         req.user = user
