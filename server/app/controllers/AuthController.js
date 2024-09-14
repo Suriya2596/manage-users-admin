@@ -140,7 +140,9 @@ authController.forgotPassword = async (req, res) => {
 
 authController.resetPassword = async (req, res) => {
     const body = req.body
-    const _id = req.params.id
+    const token  = req.params.token
+    const tokenData  = jwt.verify(token, "forgotPassword")
+    const _id = tokenData?.userId
     try {
         if (!body?.password) {
             return res.status(400).json({
@@ -151,8 +153,7 @@ authController.resetPassword = async (req, res) => {
         body.password = await bcrypt.hash(body.password, salt);
         const updateUser = await User.findOneAndUpdate({ _id }, { password: body?.password }, { new: true, runValidators: true })
         if (updateUser) {
-            return res.status(400).json({
-                data: updateUser,
+            return res.status(200).json({
                 message: "Successfully updated password",
             });
         } else {

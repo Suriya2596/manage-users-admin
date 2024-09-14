@@ -71,7 +71,7 @@ const Login = () => {
         isNeedAction401: false,
       });
     }
-  }, [loginAct?.isError, dispatch]);
+  }, [loginAct,handleErrorMsg, dispatch]);
 
   useEffect(() => {
     if (loginAct?.isSuccess) {
@@ -84,7 +84,7 @@ const Login = () => {
         },
       });
     }
-  }, [loginAct?.isSuccess]);
+  }, [loginAct , dispatch , handleSuccessMsg , navigate]);
 
   return (
     <div className="bg-whiteOne h-[100vh] flex justify-center items-center px-4">

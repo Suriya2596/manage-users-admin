@@ -1,17 +1,25 @@
-import { useState } from "react";
-import {
-  InputTextLable,
-} from "../../components/common/InputFields";
-import {
-  validateEmail,
-} from "../../components/helpers/Validations";
+import { useEffect, useState } from "react";
+import { InputTextLable } from "../../components/common/InputFields";
+import { validateEmail } from "../../components/helpers/Validations";
 import { Link } from "react-router-dom";
-import { ButtonBox } from "../../components/common/Button";
+import { ButtonBox, ButtonLoading } from "../../components/common/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { userAuthforgotPasswordAction } from "../../redux/feature/userAuth/userAuthActions";
+import { useSuccessMsgContext } from "../../context/SuccessMsgContext";
+import { useErrorMsgContext } from "../../context/ErrorMsgContext";
+import { resetUserAuth } from "../../redux/feature/userAuth/userAuthSlice";
 
 const ForgotPassword = () => {
+  const dispatch = useDispatch();
+  const { handleErrorMsg } = useErrorMsgContext();
+  const { handleSuccessMsg } = useSuccessMsgContext();
   const [email, setEmail] = useState("");
   const [formError, setFormError] = useState({});
   let formErr = {};
+
+  const { forgotPasswordAct } = useSelector((state) => {
+    return state.userAuth;
+  });
 
   const handleFormError = () => {
     if (String(email).trim().length === 0) {
@@ -31,9 +39,35 @@ const ForgotPassword = () => {
       const formData = {
         email,
       };
-      console.log(formData);
+      dispatch(userAuthforgotPasswordAction({ formData }));
     }
   };
+
+  useEffect(() => {
+    if (forgotPasswordAct?.isError) {
+      handleErrorMsg({
+        actionResponse: forgotPasswordAct?.errorResponse,
+        msg: "Can't send forgot password link",
+        actionResolve: () => {
+          dispatch(resetUserAuth());
+        },
+        isNeedAction401: false,
+      });
+    }
+  }, [forgotPasswordAct, dispatch, handleErrorMsg]);
+
+  useEffect(() => {
+    if (forgotPasswordAct?.isSuccess) {
+      handleSuccessMsg({
+        actionMsg: forgotPasswordAct?.successMsg,
+        msg: "Successfully send forgot password link",
+        actionResolve: () => {
+          dispatch(resetUserAuth());
+          setEmail("")
+        },
+      });
+    }
+  }, [forgotPasswordAct, dispatch, handleSuccessMsg]);
 
   return (
     <div className="bg-whiteOne h-[100vh] flex justify-center items-center px-4">
@@ -55,7 +89,9 @@ const ForgotPassword = () => {
             />
           </div>
           <div className="col-span-12 flex justify-center items-center">
-            <ButtonBox type={"submit"}>Send Link</ButtonBox>
+            <ButtonBox type={forgotPasswordAct?.isLoading ? "" : "submit"}>
+              {forgotPasswordAct?.isLoading ? <ButtonLoading /> : "Send Link"}
+            </ButtonBox>
           </div>
           <div className="col-span-12 text-center">
             <Link to={"/login"}>Back to login</Link>

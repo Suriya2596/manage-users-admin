@@ -28,6 +28,30 @@ export const userAuthLoginAction = createAsyncThunk("userAuth/userAuthLoginActio
     }
 })
 
+export const userAuthforgotPasswordAction = createAsyncThunk("userAuth/userAuthforgotPasswordAction", async (req, thunkAPI) => {
+    try {
+        const response = await axiosIntance.post("forgot-password", req?.formData);
+        if (response.status >= 200 && response.status < 300) {
+            const data = response?.data;
+            return data;
+        }
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error?.response);
+    }
+})
+
+
+export const userAuthResetPasswordAction = createAsyncThunk("userAuth/userAuthResetPasswordAction", async (req, thunkAPI) => {
+    try {
+        const response = await axiosIntance.post(`reset-password/${req?.token}`, req?.formData);
+        if (response.status >= 200 && response.status < 300) {
+            const data = response?.data;
+            return data;
+        }
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error?.response);
+    }
+})
 
 export const userAuthGetLoggedAction = createAsyncThunk("userAuth/userAuthGetLoggedAction", async (req, thunkAPI) => {
     try {

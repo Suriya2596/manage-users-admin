@@ -1,18 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   InputPasswordLable,
 } from "../../components/common/InputFields";
 import {
   validatePassword,
 } from "../../components/helpers/Validations";
-import { Link } from "react-router-dom";
-import { ButtonBox } from "../../components/common/Button";
+import { Link, useNavigate } from "react-router-dom";
+import { ButtonBox, ButtonLoading } from "../../components/common/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { useErrorMsgContext } from "../../context/ErrorMsgContext";
+import { useSuccessMsgContext } from "../../context/SuccessMsgContext";
+import { resetUserAuth } from "../../redux/feature/userAuth/userAuthSlice";
+import { userAuthResetPasswordAction } from "../../redux/feature/userAuth/userAuthActions";
 
 const ResetPassword = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { handleErrorMsg } = useErrorMsgContext();
+  const { handleSuccessMsg } = useSuccessMsgContext();
   const [newPassword, setNewPassword] = useState("");
   const [repeatePassword, setRepeatePassword] = useState("");
   const [formError, setFormError] = useState({});
+  const [token, setToken] = useState("");
   let formErr = {};
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tokenFromUrl = params.get("token");
+    setToken(tokenFromUrl);
+  }, []);
+
+  const { resetPasswordAct } = useSelector((state) => {
+    return state.userAuth;
+  });
 
   const handleFormError = () => {
 
@@ -38,11 +58,38 @@ const ResetPassword = () => {
       formErr = {};
     } else {
       const formData = {
-        newPassword,
+        password:newPassword,
       };
-      console.log(formData);
+      dispatch(userAuthResetPasswordAction({formData , token}))
     }
   };
+
+  
+  useEffect(() => {
+    if (resetPasswordAct?.isError) {
+      handleErrorMsg({
+        actionResponse: resetPasswordAct?.errorResponse,
+        msg: "Can't change password",
+        actionResolve: () => {
+          dispatch(resetUserAuth());
+        },
+        isNeedAction401: false,
+      });
+    }
+  }, [resetPasswordAct,handleErrorMsg, dispatch]);
+
+  useEffect(() => {
+    if (resetPasswordAct?.isSuccess) {
+      handleSuccessMsg({
+        actionMsg: resetPasswordAct?.successMsg,
+        msg: "Successfully change password",
+        actionResolve: () => {
+          dispatch(resetUserAuth());
+          navigate("/login")
+        },
+      });
+    }
+  }, [resetPasswordAct , dispatch , handleSuccessMsg , navigate ]);
 
   return (
     <div className="bg-whiteOne h-[100vh] flex justify-center items-center px-4">
@@ -83,7 +130,7 @@ const ResetPassword = () => {
             />
           </div>
           <div className="col-span-12 flex justify-center items-center">
-            <ButtonBox type={"submit"}>Change Password</ButtonBox>
+            <ButtonBox type={ resetPasswordAct?.isLoading ? "" : "submit"}> {resetPasswordAct?.isLoading ? <ButtonLoading /> : "Change Password"} </ButtonBox>
           </div>
           <div className="col-span-12 text-center">
             <Link to={"/login"}>Back to login</Link>

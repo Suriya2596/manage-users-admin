@@ -15,7 +15,7 @@ routes.delete("/role/:id", authentication, roleController.destroy)
 routes.post("/user", authController.create)
 routes.post("/login", authController.login)
 routes.post("/forgot-password", authController.forgotPassword)
-routes.post("/reset-password/:id", authController.resetPassword)
+routes.post("/reset-password/:token", authController.resetPassword)
 
 // user
 routes.get("/user", authentication, userController.getLoggedUser)

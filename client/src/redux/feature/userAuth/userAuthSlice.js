@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userAuthGetLoggedAction, userAuthLoginAction, userAuthUpdateAction, userAuthUpdatePasswordAction } from "./userAuthActions";
+import { userAuthforgotPasswordAction, userAuthGetLoggedAction, userAuthLoginAction, userAuthResetPasswordAction, userAuthUpdateAction, userAuthUpdatePasswordAction } from "./userAuthActions";
 
 const getInitialState = () => {
     return {
@@ -17,6 +17,8 @@ const initialState = {
     getUserLoggedAct: getInitialState(),
     userAuthUpdateAct: getInitialState(),
     userAuthUpdatePasswordAct: getInitialState(),
+    forgotPasswordAct : getInitialState(),
+    resetPasswordAct: getInitialState(),
     userData: {}
 };
 
@@ -29,12 +31,16 @@ const userAuthSlice = createSlice({
             state.getUserLoggedAct = getInitialState()
             state.userAuthUpdateAct = getInitialState()
             state.userAuthUpdatePasswordAct = getInitialState()
+            state.forgotPasswordAct = getInitialState()
+            state.resetPasswordAct = getInitialState()
         },
         resetUserAuthValue: (state) => {
             state.loginAct = getInitialState()
             state.getUserLoggedAct = getInitialState()
             state.userAuthUpdateAct = getInitialState()
             state.userAuthUpdatePasswordAct = getInitialState()
+            state.forgotPasswordAct = getInitialState()
+            state.resetPasswordAct = getInitialState()
             state.userData = {}
         }
     },
@@ -53,6 +59,38 @@ const userAuthSlice = createSlice({
             state.loginAct = getInitialState()
             state.loginAct.isSuccess = true
             state.loginAct.successMsg = "Successfully login"
+        });
+
+        builder.addCase(userAuthforgotPasswordAction.pending, (state) => {
+            state.forgotPasswordAct = getInitialState()
+            state.forgotPasswordAct.isLoading = true
+        })
+        builder.addCase(userAuthforgotPasswordAction.rejected, (state, action) => {
+            state.forgotPasswordAct = getInitialState()
+            state.forgotPasswordAct.isError = true
+            state.forgotPasswordAct.errorResponse = action.payload
+            state.forgotPasswordAct.errorMsg = "Failed to send forgot password link"
+        });
+        builder.addCase(userAuthforgotPasswordAction.fulfilled, (state) => {
+            state.forgotPasswordAct = getInitialState()
+            state.forgotPasswordAct.isSuccess = true
+            state.forgotPasswordAct.successMsg = "Successfully send forgot password link"
+        });
+
+        builder.addCase(userAuthResetPasswordAction.pending, (state) => {
+            state.resetPasswordAct = getInitialState()
+            state.resetPasswordAct.isLoading = true
+        })
+        builder.addCase(userAuthResetPasswordAction.rejected, (state, action) => {
+            state.resetPasswordAct = getInitialState()
+            state.resetPasswordAct.isError = true
+            state.resetPasswordAct.errorResponse = action.payload
+            state.resetPasswordAct.errorMsg = "Failed to change password"
+        });
+        builder.addCase(userAuthResetPasswordAction.fulfilled, (state) => {
+            state.resetPasswordAct = getInitialState()
+            state.resetPasswordAct.isSuccess = true
+            state.resetPasswordAct.successMsg = "Successfully change password"
         });
 
 
