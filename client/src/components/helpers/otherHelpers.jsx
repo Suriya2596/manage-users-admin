@@ -14,6 +14,10 @@ export const getCookies = (name) => {
   return cookies.get(name) && JSON.parse(cookies.get(name));
 };
 
+export const removeCookies = (name) => {
+  return cookies.get(name) && cookies.remove(name);
+};
+
 export const getAPIToken = (name) => {
   return cookies.get(name) && JSON.parse(cookies.get(name));
 };

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userAuthGetLoggedAction, userAuthLoginAction } from "./userAuthActions";
+import { userAuthGetLoggedAction, userAuthLoginAction, userAuthUpdateAction, userAuthUpdatePasswordAction } from "./userAuthActions";
 
 const getInitialState = () => {
     return {
@@ -15,6 +15,8 @@ const getInitialState = () => {
 const initialState = {
     loginAct: getInitialState(),
     getUserLoggedAct: getInitialState(),
+    userAuthUpdateAct: getInitialState(),
+    userAuthUpdatePasswordAct: getInitialState(),
     userData: {}
 };
 
@@ -25,10 +27,14 @@ const userAuthSlice = createSlice({
         resetUserAuth: (state) => {
             state.loginAct = getInitialState();
             state.getUserLoggedAct = getInitialState()
+            state.userAuthUpdateAct = getInitialState()
+            state.userAuthUpdatePasswordAct = getInitialState()
         },
         resetUserAuthValue: (state) => {
             state.loginAct = getInitialState()
             state.getUserLoggedAct = getInitialState()
+            state.userAuthUpdateAct = getInitialState()
+            state.userAuthUpdatePasswordAct = getInitialState()
             state.userData = {}
         }
     },
@@ -67,6 +73,40 @@ const userAuthSlice = createSlice({
             state.getUserLoggedAct.successMsg = action.payload?.message
             state.userData = action.payload?.data
         });
+
+        builder.addCase(userAuthUpdateAction.pending, (state) => {
+            state.userAuthUpdateAct = getInitialState()
+            state.userAuthUpdateAct.isLoading = true
+        })
+        builder.addCase(userAuthUpdateAction.rejected, (state, action) => {
+            state.userAuthUpdateAct = getInitialState()
+            state.userAuthUpdateAct.isError = true
+            state.userAuthUpdateAct.errorResponse = action.payload
+            state.userAuthUpdateAct.errorMsg = action.payload?.message
+        });
+        builder.addCase(userAuthUpdateAction.fulfilled, (state, action) => {
+            state.userAuthUpdateAct = getInitialState()
+            state.userAuthUpdateAct.isSuccess = true
+            state.userAuthUpdateAct.successMsg = action.payload?.message
+            state.userData = action.payload?.data
+        });
+
+        builder.addCase(userAuthUpdatePasswordAction.pending, (state) => {
+            state.userAuthUpdatePasswordAct = getInitialState()
+            state.userAuthUpdatePasswordAct.isLoading = true
+        })
+        builder.addCase(userAuthUpdatePasswordAction.rejected, (state, action) => {
+            state.userAuthUpdatePasswordAct = getInitialState()
+            state.userAuthUpdatePasswordAct.isError = true
+            state.userAuthUpdatePasswordAct.errorResponse = action.payload
+            state.userAuthUpdatePasswordAct.errorMsg = action.payload?.message
+        });
+        builder.addCase(userAuthUpdatePasswordAction.fulfilled, (state, action) => {
+            state.userAuthUpdatePasswordAct = getInitialState()
+            state.userAuthUpdatePasswordAct.isSuccess = true
+            state.userAuthUpdatePasswordAct.successMsg = action.payload?.message
+        });
+
     }
 })
 

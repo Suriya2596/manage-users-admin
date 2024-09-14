@@ -134,8 +134,8 @@ userController.changePassword = async (req, res) => {
         body.password = await bcrypt.hash(body.newPassword, salt);
         const updateUser = await User.findOneAndUpdate({ _id }, { password: body?.password }, { new: true, runValidators: true })
         if (updateUser) {
-            return res.status(400).json({
-                data: updateUser,
+            return res.status(200).json({
+                data: updateUser?._id,
                 message: "Successfully updated password",
             });
         } else {

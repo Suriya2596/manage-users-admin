@@ -51,7 +51,7 @@ ButtonBox.propTypes = {
   className: PropTypes.string,
 };
 
-export const ButtonCancle = ({ children, type, to, className }) => {
+export const ButtonCancle = ({ children, type, to, className , onClick=()=>{}}) => {
   return (
     <>
       {to ? (
@@ -64,6 +64,7 @@ export const ButtonCancle = ({ children, type, to, className }) => {
       ) : (
         <button
           type={type || "button"}
+          onClick={onClick}
           className={`${className}  text-center font-[500] outline-none border-none bg-primThree hover:bg-darkOne text-darkTwo hover:text-whiteOne px-8 py-1.5 rounded-[6px]`}
         >
           {children}
@@ -78,4 +79,5 @@ ButtonCancle.propTypes = {
   type: PropTypes.string,
   to: PropTypes.string,
   className: PropTypes.string,
+  onClick: PropTypes.func
 };

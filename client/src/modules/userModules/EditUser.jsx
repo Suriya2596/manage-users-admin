@@ -1,19 +1,45 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   InputNumberLable,
   InputTextLable,
 } from "../../components/common/InputFields";
-import {
-  validateName,
-} from "../../components/helpers/Validations";
+import { validateName } from "../../components/helpers/Validations";
 import { Link } from "react-router-dom";
 import { ButtonBox } from "../../components/common/Button";
+import {
+  userAuthGetLoggedAction,
+  userAuthUpdateAction,
+} from "../../redux/feature/userAuth/userAuthActions";
+import { useDispatch, useSelector } from "react-redux";
+import { useErrorMsgContext } from "../../context/ErrorMsgContext";
+import { useSuccessMsgContext } from "../../context/SuccessMsgContext";
+import { resetUserAuth } from "../../redux/feature/userAuth/userAuthSlice";
 
 const EditUser = () => {
+  const dispatch = useDispatch();
+  const { handleErrorMsg } = useErrorMsgContext();
+  const { handleSuccessMsg } = useSuccessMsgContext();
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
   const [formError, setFormError] = useState({});
   let formErr = {};
+
+  useEffect(() => {
+    return () => {
+      return dispatch(userAuthGetLoggedAction());
+    };
+  }, [dispatch]);
+
+  const { userData, userAuthUpdateAct } = useSelector((state) => {
+    return state.userAuth;
+  });
+
+  useEffect(() => {
+    if (userData) {
+      setName(userData?.name || "");
+      setMobile(String(userData?.mobile) || "");
+    }
+  }, [userData]);
 
   const handleFormError = () => {
     if (String(name).trim().length === 0) {
@@ -35,9 +61,33 @@ const EditUser = () => {
         name,
         mobile,
       };
-      console.log(formData);
+      dispatch(userAuthUpdateAction({ id: userData?._id, formData }));
     }
   };
+
+  useEffect(() => {
+    if (userAuthUpdateAct?.isError) {
+      handleErrorMsg({
+        actionResponse: userAuthUpdateAct?.errorResponse,
+        msg: "Error in update details",
+        actionResolve: () => {
+          dispatch(resetUserAuth());
+        },
+      });
+    }
+  }, [userAuthUpdateAct, dispatch, handleErrorMsg]);
+
+  useEffect(() => {
+    if (userAuthUpdateAct?.isSuccess) {
+      handleSuccessMsg({
+        actionMsg: userAuthUpdateAct?.successMsg,
+        msg: "Successfully updated details",
+        actionResolve: () => {
+          dispatch(resetUserAuth());
+        },
+      });
+    }
+  }, [userAuthUpdateAct, dispatch, handleSuccessMsg]);
 
   return (
     <div className="bg-whiteOne h-[100vh] flex justify-center items-center px-4">

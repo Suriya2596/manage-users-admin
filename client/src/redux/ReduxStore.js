@@ -9,24 +9,27 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import storage from "redux-persist/lib/storage"; // Default to localStorage for web
 import userAuthSlice from "./feature/userAuth/userAuthSlice";
 
+// Root Reducer combining all the reducers (you can add more slices as needed)
 const rootReducer = combineReducers({
-  userAuth: userAuthSlice
+  userAuth: userAuthSlice,
+  // Add more slices here if needed
 });
-
 
 // Configure persist settings
 const persistConfig = {
-  key: "root",
-  version: 2,
+  key: "newRoot",
+  version: 3,
   storage,
+  blacklist: [], 
 };
 
+// Persisted reducer
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// Create the store with the persisted reducer
+// Store configuration
 const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
@@ -37,7 +40,6 @@ const store = configureStore({
     }),
 });
 
-// Create a persistor
 const persistor = persistStore(store);
 
 export { store, persistor };

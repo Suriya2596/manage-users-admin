@@ -23,7 +23,7 @@ export const SuccessMsgContextProvider = ({ children }) => {
     </SuccessMsgContext.Provider>
   );
 };
-// eslint-disable-next-line react-refresh/only-export-components
+
 export const useSuccessMsgContext = () => {
   const context = useContext(SuccessMsgContext);
   return context;

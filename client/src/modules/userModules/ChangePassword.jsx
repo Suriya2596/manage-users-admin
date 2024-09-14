@@ -1,19 +1,31 @@
-import { useState } from "react";
-import {
-  InputPasswordLable,
-} from "../../components/common/InputFields";
-import {
-  validatePassword,
-} from "../../components/helpers/Validations";
+import { useEffect, useState } from "react";
+import { InputPasswordLable } from "../../components/common/InputFields";
+import { validatePassword } from "../../components/helpers/Validations";
 import { Link } from "react-router-dom";
 import { ButtonBox } from "../../components/common/Button";
+import {
+  userAuthUpdatePasswordAction,
+} from "../../redux/feature/userAuth/userAuthActions";
+import { useDispatch, useSelector } from "react-redux";
+import { useErrorMsgContext } from "../../context/ErrorMsgContext";
+import { useSuccessMsgContext } from "../../context/SuccessMsgContext";
+import { resetUserAuth } from "../../redux/feature/userAuth/userAuthSlice";
+import { useUserSigngOut } from "../../context/UserSigngOut";
 
 const ChangePassword = () => {
+  const dispatch = useDispatch();
+  const { handleSignOut } = useUserSigngOut();
+  const { handleErrorMsg } = useErrorMsgContext();
+  const { handleSuccessMsg } = useSuccessMsgContext();
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [repeatePassword, setRepeatePassword] = useState("");
   const [formError, setFormError] = useState({});
   let formErr = {};
+
+  const { userAuthUpdatePasswordAct } = useSelector((state) => {
+    return state.userAuth;
+  });
 
   const handleFormError = () => {
     if (String(currentPassword).trim().length === 0) {
@@ -45,12 +57,37 @@ const ChangePassword = () => {
       formErr = {};
     } else {
       const formData = {
-        newPassword,
-        currentPassword,
+        newPassword: newPassword,
+        oldPassword: currentPassword,
       };
-      console.log(formData);
+      dispatch(userAuthUpdatePasswordAction({ formData }));
     }
   };
+
+  useEffect(() => {
+    if (userAuthUpdatePasswordAct?.isError) {
+      handleErrorMsg({
+        actionResponse: userAuthUpdatePasswordAct?.errorResponse,
+        msg: "Error in change password",
+        actionResolve: () => {
+          dispatch(resetUserAuth());
+        },
+      });
+    }
+  }, [userAuthUpdatePasswordAct, dispatch, handleErrorMsg]);
+
+  useEffect(() => {
+    if (userAuthUpdatePasswordAct?.isSuccess) {
+      handleSuccessMsg({
+        actionMsg: userAuthUpdatePasswordAct?.successMsg,
+        msg: "Successfully changed password",
+        actionResolve: () => {
+          dispatch(resetUserAuth());
+          handleSignOut();
+        },
+      });
+    }
+  }, [userAuthUpdatePasswordAct, dispatch, handleSuccessMsg, handleSignOut]);
 
   return (
     <div className="bg-whiteOne h-[100vh] flex justify-center items-center px-4">

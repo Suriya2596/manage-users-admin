@@ -6,6 +6,7 @@ import Loadable from "./components/helpers/Loadable";
 import { Toaster } from "react-hot-toast";
 import AllContextProvider from "./context/AllContextProvider";
 import { ProtectedRouter } from "./components/layout/ProtectedRouter";
+import MainLayout from "./components/layout/MainLayout";
 // components
 // Auth
 const Login = Loadable(lazy(() => import("./modules/authModules/Login")));
@@ -32,15 +33,17 @@ const App = () => {
       <ScrollToTop>
         <Toaster position="top-right" />
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/forgotPassword" element={<ForgotPassword />} />
-          <Route path="/resetPassword" element={<ResetPassword />} />
+          <Route path="" element={<MainLayout />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/forgotPassword" element={<ForgotPassword />} />
+            <Route path="/resetPassword" element={<ResetPassword />} />
 
-          <Route path="" element={<ProtectedRouter />}>
-            <Route path="/" index element={<UserDashboard />} />
-            <Route path="/editUser" element={<EditUser />} />
-            <Route path="/changePassword" element={<ChangePassword />} />
+            <Route path="" element={<ProtectedRouter />}>
+              <Route path="/" index element={<UserDashboard />} />
+              <Route path="/editUser" element={<EditUser />} />
+              <Route path="/changePassword" element={<ChangePassword />} />
+            </Route>
           </Route>
         </Routes>
       </ScrollToTop>
