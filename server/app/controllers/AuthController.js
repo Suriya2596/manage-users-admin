@@ -12,7 +12,7 @@ authController.create = async (req, res) => {
     try {
         stringTrim(body)
         requiredError({requiredFields:['name', 'email', 'mobile', 'password', 'role'] , body})
-        // Check if a user with the same email already exists
+        // Check if a user with the same email already exists createdBy
         const existingUser = await User.findOne({ email: body.email });
         if (existingUser) {
             return res.status(400).json({

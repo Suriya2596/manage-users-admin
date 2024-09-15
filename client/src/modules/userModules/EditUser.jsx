@@ -5,7 +5,7 @@ import {
 } from "../../components/common/InputFields";
 import { validateName } from "../../components/helpers/Validations";
 import { Link } from "react-router-dom";
-import { ButtonBox } from "../../components/common/Button";
+import { ButtonBox, ButtonLoading } from "../../components/common/Button";
 import {
   userAuthGetLoggedAction,
   userAuthUpdateAction,
@@ -130,7 +130,14 @@ const EditUser = () => {
             />
           </div>
           <div className="col-span-12 flex justify-center items-center">
-            <ButtonBox type={"submit"}>Save Change</ButtonBox>
+            <ButtonBox type={userAuthUpdateAct?.isLoading ? "" : "submit"}>
+              {" "}
+              {userAuthUpdateAct?.isLoading ? (
+                <ButtonLoading />
+              ) : (
+                "Save Change"
+              )}{" "}
+            </ButtonBox>
           </div>
           <div className="col-span-12 text-center flex justify-center items-center gap-4 flex-col lg:flex-row">
             <Link to={"/"}>Back to home</Link> (or)

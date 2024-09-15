@@ -43,10 +43,11 @@ const userSchema = new Schema({
         required: [true, "Role is required"],
         ref: "Role",
     },
-    createdBy:{
-        type:String,
-        default:"by know"
-    }
+    createdBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',  // References another User
+        required: false, // can be empty in some cases
+    },
 }, { timestamps: true })
 
 const User = mongoose.model("User", userSchema)

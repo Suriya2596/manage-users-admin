@@ -10,8 +10,8 @@ export const validateEmail = (email) => {
 };
 
 export const validateName = (value) => {
-  const regex = /^[A-Za-z]*$/;
-  return regex.test(value);
+  const regex = /^[A-Za-z\s]+$/; // Allows alphabets and spaces
+  return regex.test(value.trim());
 };
 
 export const validateNumber = (value) => {
