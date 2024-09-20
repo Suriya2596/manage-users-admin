@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 import AllContextProvider from "./context/AllContextProvider";
 import { ProtectedRouter } from "./components/layout/ProtectedRouter";
 import MainLayout from "./components/layout/MainLayout";
+import AdminLayout from "./components/layout/AdminLayout";
 // components
 // Auth
 const Login = Loadable(lazy(() => import("./modules/authModules/Login")));
@@ -44,6 +45,8 @@ const App = () => {
               <Route path="/editUser" element={<EditUser />} />
               <Route path="/changePassword" element={<ChangePassword />} />
             </Route>
+          </Route>
+          <Route path="admin" element={<AdminLayout />}>
           </Route>
         </Routes>
       </ScrollToTop>

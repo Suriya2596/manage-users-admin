@@ -26,114 +26,114 @@
 
 @font-face {
   font-family: "Nunito";
-  src: url("../../../public/fonts/Nunito-Black.ttf") format('truetype');
+  src: url("../../../public/fonts/Nunito-Black.ttf") format("truetype");
   font-weight: 900;
   font-style: normal;
 }
 @font-face {
   font-family: "Nunito";
-  src: url("../../../public/fonts/Nunito-BlackItalic.ttf") format('truetype');
+  src: url("../../../public/fonts/Nunito-BlackItalic.ttf") format("truetype");
   font-weight: 900;
   font-style: italic;
 }
 
 @font-face {
   font-family: "Nunito";
-  src: url("../../../public/fonts/Nunito-ExtraBold.ttf") format('truetype');
+  src: url("../../../public/fonts/Nunito-ExtraBold.ttf") format("truetype");
   font-weight: 800;
   font-style: normal;
 }
 @font-face {
   font-family: "Nunito";
-  src: url("../../../public/fonts/Nunito-ExtraBoldItalic.ttf") format('truetype');
+  src: url("../../../public/fonts/Nunito-ExtraBoldItalic.ttf")
+    format("truetype");
   font-weight: 800;
   font-style: italic;
 }
 
 @font-face {
   font-family: "Nunito";
-  src: url("../../../public/fonts/Nunito-Bold.ttf") format('truetype');
+  src: url("../../../public/fonts/Nunito-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
 }
 @font-face {
   font-family: "Nunito";
-  src: url("../../../public/fonts/Nunito-Bold.ttf") format('truetype');
+  src: url("../../../public/fonts/Nunito-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: italic;
 }
 
 @font-face {
   font-family: "Nunito";
-  src: url("../../../public/fonts/Nunito-SemiBold.ttf") format('truetype');
+  src: url("../../../public/fonts/Nunito-SemiBold.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
 }
 @font-face {
   font-family: "Nunito";
-  src: url("../../../public/fonts/Nunito-SemiBoldItalic.ttf") format('truetype');
+  src: url("../../../public/fonts/Nunito-SemiBoldItalic.ttf") format("truetype");
   font-weight: 600;
   font-style: italic;
 }
 
 @font-face {
   font-family: "Nunito";
-  src: url("../../../public/fonts/Nunito-Medium.ttf") format('truetype');
+  src: url("../../../public/fonts/Nunito-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
 }
 @font-face {
   font-family: "Nunito";
-  src: url("../../../public/fonts/Nunito-MediumItalic.ttf") format('truetype');
+  src: url("../../../public/fonts/Nunito-MediumItalic.ttf") format("truetype");
   font-weight: 500;
   font-style: italic;
 }
 
 @font-face {
   font-family: "Nunito";
-  src: url("../../../public/fonts/Nunito-Regular.ttf") format('truetype');
+  src: url("../../../public/fonts/Nunito-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Nunito";
-  src: url("../../../public/fonts/Nunito-Light.ttf") format('truetype');
+  src: url("../../../public/fonts/Nunito-Light.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
 }
 @font-face {
   font-family: "Nunito";
-  src: url("../../../public/fonts/Nunito-LightItalic.ttf") format('truetype');
+  src: url("../../../public/fonts/Nunito-LightItalic.ttf") format("truetype");
   font-weight: 300;
   font-style: italic;
 }
 
-
 @font-face {
   font-family: "Nunito";
-  src: url("../../../public/fonts/Nunito-ExtraLight.ttf") format('truetype');
+  src: url("../../../public/fonts/Nunito-ExtraLight.ttf") format("truetype");
   font-weight: 200;
   font-style: normal;
 }
 @font-face {
   font-family: "Nunito";
-  src: url("../../../public/fonts/Nunito-ExtraLightItalic.ttf") format('truetype');
+  src: url("../../../public/fonts/Nunito-ExtraLightItalic.ttf")
+    format("truetype");
   font-weight: 200;
   font-style: italic;
 }
-
 
 :root {
   --font-Nunito: "Nunito", sans-serif;
-  --primOne: #581D9E;
-  --primTwo: #B587EC;
-  --primThree: #D5C8E5;
-  --darkOne: #180A28;
+  --primOne: #581d9e;
+  --primTwo: #b587ec;
+  --primThree: #d5c8e5;
+  --darkOne: #180a28;
   --darkTwo: #200046;
-  --darkThree: #6F667A;
-  --whiteOne: #F8F3FF;
-  --whiteTwo: #D2D2D2;
+  --darkThree: #6f667a;
+  --whiteOne: #f8f3ff;
+  --whiteTwo: #d2d2d2;
 }
 
 * {
@@ -162,7 +162,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Removeing input number arrow : Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -175,7 +175,7 @@ p {
   font-weight: 400;
   color: var(--darkThree);
 }
-a{
+a {
   color: var(--primOne);
 }
 
@@ -213,6 +213,30 @@ h6 {
 /*----------------------------------------*/
 /* 2.Common CSS */
 /*----------------------------------------*/
+.width-ainm {
+  -webkit-transition: width 395ms cubic-bezier(0.4, 0, 0.6, 1) 50ms,
+    margin 395ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+  transition: width 395ms cubic-bezier(0.4, 0, 0.6, 1) 50ms,
+    margin 395ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+}
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-y: scroll;
+}
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+.link-nav {
+  @apply p-2.5 flex rounded-md gap-6 items-center md:cursor-pointer cursor-default duration-300 font-medium;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
 
 /*----------------------------------------*/
 /* 3.Header CSS */
@@ -221,7 +245,6 @@ h6 {
 /*----------------------------------------*/
 /* 4.Home Page CSS */
 /*----------------------------------------*/
-
 
 /*----------------------------------------*/
 /* 5.Resume Page CSS */
@@ -238,7 +261,6 @@ h6 {
 /*----------------------------------------*/
 /* 8.Contact Page CSS */
 /*----------------------------------------*/
-
 
 /*----------------------------------------*/
 /*Responsive CSS */
@@ -271,8 +293,8 @@ h6 {
   h6 {
     font-size: 16px;
   }
-  p{
-    font-size: 16px
+  p {
+    font-size: 16px;
   }
 }
 
