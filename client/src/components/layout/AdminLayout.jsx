@@ -4,18 +4,10 @@ import { motion } from "framer-motion";
 
 // * React icons
 import { TbBrandGoogleHome } from "react-icons/tb";
-import {
-  MdOutlineRocketLaunch,
-  MdOutlineCampaign,
-  MdOutlineCloudUpload,
-} from "react-icons/md";
 import { BiMenu } from "react-icons/bi";
-import { IoStatsChartOutline } from "react-icons/io5";
-import { GoShieldCheck } from "react-icons/go";
-import { BsFillQuestionCircleFill } from "react-icons/bs";
-import { FiSettings } from "react-icons/fi";
-import { RiBubbleChartFill } from "react-icons/ri";
-import { PiLineSegmentsFill } from "react-icons/pi";
+import { LuUsers2 } from "react-icons/lu";
+import { RiShieldUserLine } from "react-icons/ri";
+
 
 // components
 import SubMenu from "./SubMenu";
@@ -77,185 +69,29 @@ const AdminLayout = () => {
       submenus: [],
     },
     {
-      name: "Campaigns",
-      link: "/campaign",
-      icon: MdOutlineCampaign,
-      submenus: [
-        {
-          name: "Manage Campaign",
-          link: "/campaign/manage-campaign",
-          icon: RiBubbleChartFill,
-        },
-      ],
-    },
-    {
-      name: "Upload",
-      link: "/upload",
-      icon: MdOutlineCloudUpload,
-      submenus: [
-        {
-          name: "Manage Import",
-          link: "/upload/manage-import",
-          icon: RiBubbleChartFill,
-        },
-        {
-          name: "Suppress Contacts",
-          link: "/upload/suppress-contacts",
-          icon: RiBubbleChartFill,
-        },
-        {
-          name: "Suppress Contacts List",
-          link: "/upload/manage-suppress-contacts",
-          icon: RiBubbleChartFill,
-        },
-      ],
-    },
-    {
-      name: "Reports",
-      link: "/report",
-      icon: IoStatsChartOutline,
-      submenus: [
-        {
-          name: "General Report",
-          link: "/report/general-report",
-          icon: RiBubbleChartFill,
-        },
-        {
-          name: "Operation Report",
-          link: "/report/operation-report",
-          icon: RiBubbleChartFill,
-        },
-        {
-          name: "Conversion Report",
-          link: "/report/conversion-report",
-          icon: RiBubbleChartFill,
-        },
-        {
-          name: "Test SMS Report",
-          link: "/report/test-sms-report",
-          icon: RiBubbleChartFill,
-        },
-      ],
-    },
-    {
-      name: "Logs",
-      link: "/logs",
-      icon: RiBubbleChartFill,
-      submenus: [
-        {
-          name: "Server Logs",
-          link: "/logs/server-logs",
-          icon: RiBubbleChartFill,
-        },
-        {
-          name: "Activity Logs",
-          link: "/logs/activity-logs",
-          icon: RiBubbleChartFill,
-        },
-        {
-          name: "Click Logs",
-          link: "/logs/click-logs",
-          icon: RiBubbleChartFill,
-        },
-        {
-          name: "Upload Logs",
-          link: "/logs/upload-logs",
-          icon: RiBubbleChartFill,
-        },
-      ],
-    },
-    {
-      name: "Segmentations",
-      link: "/segmentation",
-      icon: PiLineSegmentsFill,
+      name: "Manage User",
+      link: "/",
+      icon: LuUsers2,
       submenus: [],
     },
     {
-      name: "Accounts",
-      link: "/accounts",
-      icon: GoShieldCheck,
-      submenus: [
-        {
-          name: "Manage Organisation",
-          link: "/accounts/organisation",
-          icon: RiBubbleChartFill,
-        },
-        {
-          name: "Manage Reseller",
-          link: "/accounts/reseller",
-          icon: RiBubbleChartFill,
-        },
-        {
-          name: "Manage Client",
-          link: "/accounts/client",
-          icon: RiBubbleChartFill,
-        },
-        {
-          name: "Manage Accounts",
-          link: "/accounts/users",
-          icon: RiBubbleChartFill,
-        },
-      ],
-    },
-    {
-      name: "Setting",
-      link: "/setting",
-      icon: FiSettings,
-      submenus: [
-        {
-          name: "Customization",
-          link: "/setting/customization",
-          icon: RiBubbleChartFill,
-        },
-        {
-          name: "Email Templates",
-          link: "/setting/email-templete",
-          icon: RiBubbleChartFill,
-        },
-        {
-          name: "Manage Category",
-          link: "/setting/manage-category",
-          icon: RiBubbleChartFill,
-        },
-        {
-          name: "Manage SMPP",
-          link: "/setting/manage-smpp",
-          icon: RiBubbleChartFill,
-        },
-        {
-          name: "Manage Sender ID",
-          link: "/setting/manage-sender-id",
-          icon: RiBubbleChartFill,
-        },
-        {
-          name: "DLT Templates",
-          link: "/setting/dlt-templates",
-          icon: RiBubbleChartFill,
-        },
-        {
-          name: "Smart Link",
-          link: "/setting/smart-link",
-          icon: RiBubbleChartFill,
-        },
-        {
-          name: "API Token",
-          link: "/setting/api-token",
-          icon: RiBubbleChartFill,
-        },
-      ],
-    },
-    {
-      name: "Release Notes",
-      link: "/release-notes",
-      icon: MdOutlineRocketLaunch,
+      name: "Manage Admin",
+      link: "/",
+      icon: RiShieldUserLine,
       submenus: [],
     },
-    {
-      name: "Help",
-      link: "/documentation",
-      icon: BsFillQuestionCircleFill,
-      submenus: [],
-    },
+    // {
+    //   name: "Campaigns",
+    //   link: "/campaign",
+    //   icon: MdOutlineCampaign,
+    //   submenus: [
+    //     {
+    //       name: "Manage Campaign",
+    //       link: "/campaign/manage-campaign",
+    //       icon: RiBubbleChartFill,
+    //     },
+    //   ],
+    // },
   ];
 
   return (
@@ -278,23 +114,20 @@ const AdminLayout = () => {
             open ? "min-w-[250px]" : "min-w-[80px]"
           }    fixed h-screen`}
         >
-          <div className="flex items-center justify-center gap-2.5 font-medium pt-6 pb-3">
+          <div className="flex ml-3 font-medium pt-6 pb-3">
             <Link to="/">
               {open ? (
                 <div className="mx-3">
-                  <img
+                  {/* <img
                     src={"/assets/images/Login-Forgot/LogoTextWHite.svg"}
                     alt={"logo"}
                     className={"mx-auto w-36"}
-                  />
+                  /> */}
+                  <span className=" text-whiteOne text-[24px]">Admin Panel</span>
                 </div>
               ) : (
                 <div className="pl-2">
-                  <img
-                    src={"/assets/images/dripeek-color-logo-icon.svg"}
-                    alt={"logo"}
-                    className={"mx-auto w-[80px] h-auto"}
-                  />
+                    <span className=" text-whiteOne text-[24px]">AP</span>
                 </div>
               )}
             </Link>
@@ -344,7 +177,7 @@ const AdminLayout = () => {
                         >
                           <Icon
                             size={23}
-                            className="min-w-max group-hover:text-whiteOne"
+                            className="min-w-max text-whiteOne group-hover:text-whiteOne"
                           />
                         </NavLink>
                       )}

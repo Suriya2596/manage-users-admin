@@ -2,7 +2,8 @@ const express = require("express")
 const roleController = require("../app/controllers/RoleController")
 const authController = require("../app/controllers/AuthController")
 const userController = require("../app/controllers/UserController")
-const { authentication } = require("../app/middleware/Authentication")
+const { authentication, authorization } = require("../app/middleware/Authentication")
+const adminController = require("../app/controllers/AdminController")
 const routes = express.Router()
 
 // role
@@ -24,5 +25,9 @@ routes.get("/user/:id", authentication, userController.getUserbyId)
 routes.patch("/user/:id", authentication, userController.updateById)
 routes.delete("/user/:id", authentication, userController.deleteUser)
 routes.patch("/user/change-password/:id", authentication, userController.changePassword)
+
+// admin
+routes.get("/admin/getUser", authentication, authorization, adminController.adminGetUser)
+// routes.get("/admin/getAdmin", authentication,)
 
 module.exports = routes

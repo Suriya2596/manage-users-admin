@@ -4,6 +4,7 @@ const userController = {}
 const { requiredError } = require("../../helpers/helper");
 const User = require("../models/UserModel");
 const bcrypt = require("bcrypt")
+
 userController.getLoggedUser = async (req, res) => {
     const user = req.user;
     try {
@@ -150,5 +151,6 @@ userController.changePassword = async (req, res) => {
         });
     }
 }
+
 
 module.exports = userController

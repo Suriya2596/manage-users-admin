@@ -36,8 +36,53 @@ const authentication = async (req, res, next) => {
     }
 };
 
+const authorization = async (req, res, next) => {
+    const loggedUser = req.user
+    try {
+        if (loggedUser.role && (loggedUser.role?.roleType === "SA" || loggedUser.role?.roleType === "A")) {
+            next()
+        }
+    } catch (error) {
+        return res.status(401).json({
+            message: "Access to this request is denied",
+            error: error.message,
+        });
+    }
+};
+
+const adminAuthorization = async (req, res, next) => {
+    const loggedUser = req.user
+    try {
+        if (loggedUser.role && (loggedUser.role?.roleType === "A")) {
+            next()
+        }
+    } catch (error) {
+        return res.status(401).json({
+            message: "Access to this request is denied",
+            error: error.message,
+        });
+    }
+};
+
+const superAdminAuthorization = async (req, res, next) => {
+    const loggedUser = req.user
+    try {
+        if (loggedUser.role && (loggedUser.role?.roleType === "A")) {
+            next()
+        }
+    } catch (error) {
+        return res.status(401).json({
+            message: "Access to this request is denied",
+            error: error.message,
+        });
+    }
+};
+
 
 
 module.exports = {
-    authentication
+    authentication,
+    authorization,
+    adminAuthorization,
+    superAdminAuthorization
 }
