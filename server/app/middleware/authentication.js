@@ -9,12 +9,17 @@ const authentication = async (req, res, next) => {
         const tokenData = jwt.verify(token, process.env.JWT_Verify);
 
         if (tokenData) {
-            let user = await User.findOne({ _id: tokenData._id }).populate("role");
+            // let user = await User.findOne({ _id: tokenData._id }).populate("role");
+
+            const user = await User.findOne({ _id: tokenData._id }).populate([
+                { path: "role" }, // Populate the `role` field
+                { path: "createdBy", select: "_id name email" }, // Populate `createdBy` and select specific fields
+            ]);
 
             if (user) {
-                if (user.createdBy) {
-                    user = await User.populate(user, { path: "createdBy", select: "_id name email" });
-                }
+                // if (user.createdBy) {
+                //     user = await User.populate(user, { path: "createdBy", select: "_id name email" });
+                // }
 
                 req.user = user;
                 next();

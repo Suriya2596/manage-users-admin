@@ -28,6 +28,7 @@ routes.patch("/user/change-password/:id", authentication, userController.changeP
 
 // admin
 routes.get("/admin/getUser", authentication, authorization, adminController.adminGetUser)
-// routes.get("/admin/getAdmin", authentication,)
+routes.get("/admin/getAdmin", authentication, authorization, adminController.adminGetAdmin)
+routes.get("/admin/getUserAdmin", authentication, authorization, adminController.adminGetUserAdmin)
 
 module.exports = routes
